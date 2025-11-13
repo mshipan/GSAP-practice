@@ -1,4 +1,53 @@
+"use client";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { useLayoutEffect } from "react";
+
 const HeroSection = () => {
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const titleSplit = SplitText.create(".title", { type: "chars, words" });
+    const tl = gsap.timeline({ delay: 1 });
+
+    tl.to(".hero", { opacity: 1, y: 0, ease: "power2.inOut" })
+      .to(
+        ".title2",
+        {
+          duration: 1,
+          clipPath: "polygon(0% 0, 100% 0, 100% 100%, 0% 100%)",
+          ease: "circ.out",
+        },
+        "-=0.5"
+      )
+      .from(
+        titleSplit.chars,
+        {
+          opacity: 0,
+          yPercent: 100,
+          stagger: 0.02,
+          ease: "power2.out",
+        },
+        "-=0.5"
+      );
+
+    const heroTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero-content",
+        start: "1% top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    heroTl.to(".hero-content", {
+      rotate: 7,
+      scale: 0.9,
+      yPercent: 30,
+      ease: "power2.inOut",
+    });
+  }, []);
   return (
     <section className="hero-content bg-rose-100 w-screen h-dvh text-black">
       <div className="hero size-full flex flex-col items-center justify-center opacity-0 translate-y-10">

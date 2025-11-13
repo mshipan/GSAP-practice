@@ -74,13 +74,14 @@ const ScrollTriggerPage = () => {
    */
     }
     gsap.to(".bigTxt", {
-      transform: "translate(-100%)",
+      xPercent: -100,
+      ease: "none",
       scrollTrigger: {
         trigger: "#page3", // paren component
         // markers: true,
         start: "top 0%",
         end: "top -100%",
-        scrub: 2,
+        scrub: true,
         pin: true, // this is stop the page being passed
       },
     });
