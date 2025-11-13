@@ -48,6 +48,7 @@ const HeroSection = () => {
       ease: "power2.inOut",
     });
   }, []);
+
   return (
     <section className="hero-content bg-rose-100 w-screen h-dvh text-black">
       <div className="hero size-full flex flex-col items-center justify-center opacity-0 translate-y-10">
